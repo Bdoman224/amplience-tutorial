@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ShippingFormLocalized from "@/app/ShippingFormLocalized";
 import ShippingForm from "@/app/ShippingForm";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
+        {/* <ShippingFormLocalized /> */}
         <ShippingForm />
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
