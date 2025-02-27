@@ -1,5 +1,7 @@
 import { ContentClient } from 'dc-delivery-sdk-js';
 import { amplienceForm } from '@/lib/definitions';
+import { Input, Box, Avatar, AvatarGroup } from "@chakra-ui/react"
+
 
 export default async function ShippingForm() {
     const client = new ContentClient({ hubName: 'anorakwaterpolo' });
@@ -16,7 +18,7 @@ export default async function ShippingForm() {
 
     function isAmplienceImageObj(field: any) {
         console.log(field)
-        return  typeof field.alt === 'string' || typeof field?.image.url === 'function' 
+        return typeof field.alt === 'string' || typeof field?.image.url === 'function'
     }
     // Why did it not working untill I had type predicate here??? 
     // HAS TO BE A BETTER WAY OF DOING THIS
@@ -30,19 +32,21 @@ export default async function ShippingForm() {
     }
 
     const { address1, address2, city, postcode, bannerImage } = await fetchForm()
+    const image = bannerImage?.image.url().build()
 
     return (
         // SEPARATE INTO CHILD COMPONENT WITH USE CLIENT
-        <form>
-            <label>{address1}</label>
-            <input></input>
-            <label>{address2}</label>
-            <input></input>
-            <label>{city}</label>
-            <input></input>
-            <label>{postcode}</label>
-            <input></input>
-            <img src={bannerImage?.image.url().build()} alt={bannerImage.alt} />
-        </form>
+        <Box bgAttachment="fixed" bgImage={image}>
+            <form className='flex flex-col max-w-4xl max-h-4xl z-100'>
+                <label>{address1}</label>
+                <Input placeholder="..." />
+                <label>{address2}</label>
+                <Input placeholder="..." />
+                <label>{city}</label>
+                <Input placeholder="..." />
+                <label>{postcode}</label>
+                <Input placeholder="..." />
+            </form>
+        </Box>
     )
 }
