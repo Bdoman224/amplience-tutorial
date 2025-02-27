@@ -1,6 +1,7 @@
 import { ContentClient } from 'dc-delivery-sdk-js';
 import { amplienceForm } from '@/lib/definitions';
-import { Input, Box, Avatar, AvatarGroup } from "@chakra-ui/react"
+import { Input, Box, Stack } from "@chakra-ui/react"
+import { Field } from '@/components/ui/field';
 
 
 export default async function ShippingForm() {
@@ -21,7 +22,7 @@ export default async function ShippingForm() {
         return typeof field.alt === 'string' || typeof field?.image.url === 'function'
     }
     // Why did it not working untill I had type predicate here??? 
-    // HAS TO BE A BETTER WAY OF DOING THIS
+    // HAS TO BE A BETTER WAY OF DOING THIS AUTOMATICALLY COMPARE TO PASSED TYPE OR SMTHN?
     function isAmplienceForm(data: any): data is amplienceForm {
         return data && typeof data === "object" &&
             typeof data.address1 === "string" &&
@@ -36,17 +37,21 @@ export default async function ShippingForm() {
 
     return (
         // SEPARATE INTO CHILD COMPONENT WITH USE CLIENT
-        <Box bgAttachment="fixed" bgImage={image}>
-            <form className='flex flex-col max-w-4xl max-h-4xl z-100'>
-                <label>{address1}</label>
-                <Input placeholder="..." />
-                <label>{address2}</label>
-                <Input placeholder="..." />
-                <label>{city}</label>
-                <Input placeholder="..." />
-                <label>{postcode}</label>
-                <Input placeholder="..." />
-            </form>
+        <Box bgAttachment="fixed" bgImage={`url(${image})`} width="1000px" height="1000px">
+            <Stack className='gap-y-4 px-8 py-10'>
+                <Field label={address1} required>
+                    <Input placeholder="George Wash Street" color="black" bg="white" />
+                </Field>
+                <Field label={address2} required>
+                    <Input placeholder="George Wash Street" color="black" bg="white" />
+                </Field>
+                <Field label={city} required>
+                    <Input placeholder="George Wash Street" color="black" bg="white" />
+                </Field>
+                <Field label={postcode} required>
+                    <Input placeholder="George Wash Street" color="black" bg="white" />
+                </Field>
+            </Stack>
         </Box>
     )
 }
