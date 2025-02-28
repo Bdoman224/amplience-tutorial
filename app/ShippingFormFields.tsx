@@ -42,8 +42,8 @@ export default function ShippingFormFields({
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> ) => {
-    console.log('AAAA', e)
     setFormFields({...formFields, [e.target.name]: e.target.value})
+    formSchema.safeParse(formFields)
   }
 
   return (
@@ -60,6 +60,7 @@ export default function ShippingFormFields({
             placeholder="George Wash Street"
             color="black"
             bg="white"
+            name="address1"
             value={formFields.address1}
             onChange={handleChange}
           />
@@ -69,6 +70,7 @@ export default function ShippingFormFields({
             placeholder="Apt 15"
             color="black"
             bg="white"
+            name="address2"
             value={formFields.address2}
             onChange={(e) => handleChange(e)}
           />
@@ -78,6 +80,7 @@ export default function ShippingFormFields({
             placeholder="San Diego"
             color="black"
             bg="white"
+            name="city"
             value={formFields.city}
             onChange={handleChange}
           />
@@ -87,6 +90,7 @@ export default function ShippingFormFields({
             placeholder="12132131"
             color="black"
             bg="white"
+            name="postcode"
             value={formFields.postcode}
             onChange={handleChange}
           />
