@@ -1,23 +1,9 @@
 "use client";
+import {formFields, amplienceProps} from "@/lib/definitions"
 import { Input, Box, Stack } from "@chakra-ui/react";
 import { Field } from "@/components/ui/field";
 import { useState } from "react";
 import { z } from "zod"
-
-type amplienceProps = {
-  address1: string;
-  address2: string;
-  city: string;
-  postcode: string;
-  image: string;
-};
-
-interface formFields {
-  address1: string;
-  address2: string;
-  city: string;
-  postcode: string;
-}
 
 const formSchema = z.object({
   address1: z.string().min(5, "Address must be at minimum 5 characters long"),
