@@ -1,44 +1,40 @@
 import { ContentClient, ContentItem } from "dc-delivery-sdk-js";
 import ShippingFormFields from "@/app/ShippingFormFields";
-
-// // MISTAKES WERE MADE SHOULD NOT HAVE WENT FOR LOCALIZATION INSTANTLY
-
-// // Move to definitions
-// type amplienceLocalizationValue = {
-//   values: { locale: string; values: string }[];
-// };
-// type amplienceForm = {
-//   addressLine1: amplienceLocalizationValue;
-//   addressLine2: amplienceLocalizationValue;
-//   city: amplienceLocalizationValue;
-//   postcode: amplienceLocalizationValue;
-//   // WHEN YOU FIGURE OUT IMAGE SPECIFY BETTER OBJ
-//   banner: Object;
-// };
+import { amplienceProps } from "@/lib/definitions";
 
 export default async function ShippingForm() {
   const client = new ContentClient({ hubName: "anorakwaterpolo" });
   const deliveryKey = "shipping-form-en";
-  const locale = "en-US";
+  const locale = "hr-HR";
 
   async function fetchForm() {
     const response = await client.getContentItemByKey(deliveryKey);
-    // TS ALWAYS ASSUMES WORST CASE SCENARIO
-    // CHECK IF ACTUALLY RECEIVED CORRECT DATA
-    console.log(response);
     const { addressLine1, addressLine2, city, postcode, banner } =
       response.body;
-    return { addressLine1, addressLine2, city, postcode, banner };
+    return { address1: addressLine1, address2: addressLine2, city, postcode, image:banner };
   }
 
   const form = await fetchForm();
 
-//   const localizedFormData = { addressLine1: '', addressLine2: '', city: ''};
-//   Object.entries(form).map(([key, value]) => {
-//     localizedFormData[key] = value.values.filter(
-//       (item: { locale: string }) => locale === item.locale
-//     );
-//   });
+  const localizedFormData: amplienceProps = {
+    // TECHNICALLY COULD HAVE JUST GONE WITH propx: func Parse(form.propx)
+    address1: "",
+    address2: "",
+    city: "",
+    postcode: "",
+    image: ""
+  };
 
-  return <p>Yo</p>;
+  Object.entries(form).forEach(([key, formProperty]) => {
+    let value = formProperty.values.find((item: { locale: string; }) => item.locale === locale)?.value || "";
+
+    if (key === "image") {
+      const currentImage = formProperty.values.find((item: { locale: string; }) => item.locale === locale)
+      value = currentImage.value.url().build()
+    }
+    
+    localizedFormData[key as keyof amplienceProps] = value;
+  });
+
+  return <ShippingFormFields {...localizedFormData} />;
 }
