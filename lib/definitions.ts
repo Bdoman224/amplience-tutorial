@@ -4,14 +4,6 @@ export type amplienceImageObj = {
   alt?: string;
 };
 
-export type amplienceForm = {
-  address1: string;
-  address2: string;
-  city: string;
-  postcode: string;
-  bannerImage: amplienceImageObj;
-};
-
 export interface formFields {
   address1: string;
   address2: string;
@@ -24,12 +16,12 @@ export interface amplienceProps extends formFields {
 }
 
 export type localizedAmplienceValue = {
-  values: { locale: string, value: string }[];
+  values: { locale: string; value: string }[];
 };
 
 export type localizedAmplienceImage = {
-    values: amplienceImageObj[]
-}
+  values: amplienceImageObj[];
+};
 
 export type localizedAmplienceForm = {
   addressLine1: localizedAmplienceValue;
