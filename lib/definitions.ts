@@ -22,9 +22,9 @@ export type LocalizedAmplienceImage = {
 };
 
 export type LocalizedAmplienceForm = {
-  addressLine1: LocalizedAmplienceValue[];
-  addressLine2: LocalizedAmplienceValue[];
-  city: LocalizedAmplienceValue[];
-  postcode: LocalizedAmplienceValue[];
-  banner: LocalizedAmplienceImage[];
+  addressLine1: { values: LocalizedAmplienceValue[]};
+  addressLine2:{ values: LocalizedAmplienceValue[]};
+  city: { values: LocalizedAmplienceValue[]};
+  postcode: { values: LocalizedAmplienceValue[]};
+  banner:{ values: LocalizedAmplienceImage[]};
 };

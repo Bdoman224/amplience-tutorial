@@ -14,9 +14,11 @@ export default async function ShippingForm() {
 
   async function fetchForm(): Promise<AmplienceProps> {
     const response = await client.getContentItemByKey(deliveryKey);
-    // CAN'T SEEM TO CAST AS LOCALIZEDAMPLIENECE FORM
+    // CAN'T SEEM TO CAST AS LOCALIZEDAMPLIENECE FORM 
+    console.log(response.body) 
+    const body= response.body as unknown as LocalizedAmplienceForm
     const { addressLine1, addressLine2, city, postcode, banner } =
-      response.body;
+      body;
 
     const localizedFormData: AmplienceProps = {
       addressLine1: findLocalizedValue(addressLine1.values, locale),
