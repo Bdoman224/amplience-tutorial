@@ -1,28 +1,28 @@
 "use client";
-import {formFields, amplienceProps} from "@/lib/definitions"
+import {FormFields, AmplienceProps} from "@/lib/definitions"
 import { Input, Box, Stack } from "@chakra-ui/react";
 import { Field } from "@/components/ui/field";
 import { useState } from "react";
 import { z } from "zod"
 
 const formSchema = z.object({
-  address1: z.string().min(5, "Address must be at minimum 5 characters long"),
-  address2: z.string().min(2, "Street number must be at minimum 2 characters long"),
+  addressLine1: z.string().min(5, "Address must be at minimum 5 characters long"),
+  addressLine2: z.string().min(2, "Street number must be at minimum 2 characters long"),
   city: z.string().min(2, "City must be at minimum 2 characters long"),
   postcode: z.string().min(2, "Postcode must be at minimum 2 characters long"),
 })
 
 export default function ShippingFormFields({
-  address1,
-  address2,
+  addressLine1,
+  addressLine2,
   city,
   postcode,
   image,
-}: amplienceProps) {
+}: AmplienceProps) {
 
-  const [formFields, setFormFields] = useState<formFields>({
-    address1: "",
-    address2: "",
+  const [formFields, setFormFields] = useState<FormFields>({
+    addressLine1: "",
+    addressLine2: "",
     city: "",
     postcode: "",
   });
@@ -41,23 +41,23 @@ export default function ShippingFormFields({
       height="1000px"
     >
       <Stack className="gap-y-4 px-8 py-10">
-        <Field label={address1} required errorText='This is required'>
+        <Field label={addressLine1} required errorText='This is required'>
           <Input
             placeholder="George Wash Street"
             color="black"
             bg="white"
-            name="address1"
-            value={formFields.address1}
+            name="addressLine1"
+            value={formFields.addressLine1}
             onChange={handleChange}
           />
         </Field>
-        <Field label={address2} required>
+        <Field label={addressLine2} required>
           <Input
             placeholder="Apt 15"
             color="black"
             bg="white"
-            name="address2"
-            value={formFields.address2}
+            name="addressLine2"
+            value={formFields.addressLine2}
             onChange={(e) => handleChange(e)}
           />
         </Field>
