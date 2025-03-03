@@ -1,9 +1,4 @@
 // DEFAULT DATA RECEIVED FROM CDN
-export type amplienceImageObj = {
-  image: { url: () => { build: () => string } };
-  alt?: string;
-};
-
 export interface FormFields {
   addressLine1: string;
   addressLine2: string;
@@ -16,17 +11,20 @@ export interface AmplienceProps extends FormFields {
 }
 
 export type LocalizedAmplienceValue = {
-  values: { locale: string; value: string }[];
+  locale: string;
+  value: string;
 };
 
 export type LocalizedAmplienceImage = {
-  values: amplienceImageObj[];
+  locale: string;
+  value?: { url: () => { build: () => string } };
+  alt?: string;
 };
 
 export type LocalizedAmplienceForm = {
-  addressLine1: LocalizedAmplienceValue;
-  addressLine2: LocalizedAmplienceValue;
-  city: LocalizedAmplienceValue;
-  postcode: LocalizedAmplienceValue;
-  banner: LocalizedAmplienceImage;
+  addressLine1: LocalizedAmplienceValue[];
+  addressLine2: LocalizedAmplienceValue[];
+  city: LocalizedAmplienceValue[];
+  postcode: LocalizedAmplienceValue[];
+  banner: LocalizedAmplienceImage[];
 };
