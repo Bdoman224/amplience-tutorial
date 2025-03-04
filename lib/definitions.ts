@@ -28,3 +28,6 @@ export type LocalizedAmplienceForm = {
   postcode: { values: LocalizedAmplienceValue[]};
   banner:{ values: LocalizedAmplienceImage[]};
 };
+
+
+// V2 SPECIFC DEFINITIONS

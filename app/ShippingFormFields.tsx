@@ -3,14 +3,14 @@ import {FormFields, AmplienceProps} from "@/lib/definitions"
 import { Input, Box, Stack } from "@chakra-ui/react";
 import { Field } from "@/components/ui/field";
 import { useState } from "react";
-import { z } from "zod"
+// import { z } from "zod"
 
-const formSchema = z.object({
-  addressLine1: z.string().min(5, "Address must be at minimum 5 characters long"),
-  addressLine2: z.string().min(2, "Street number must be at minimum 2 characters long"),
-  city: z.string().min(2, "City must be at minimum 2 characters long"),
-  postcode: z.string().min(2, "Postcode must be at minimum 2 characters long"),
-})
+// const formSchema = z.object({
+//   addressLine1: z.string().min(5, "Address must be at minimum 5 characters long"),
+//   addressLine2: z.string().min(2, "Street number must be at minimum 2 characters long"),
+//   city: z.string().min(2, "City must be at minimum 2 characters long"),
+//   postcode: z.string().min(2, "Postcode must be at minimum 2 characters long"),
+// })
 
 export default function ShippingFormFields({
   addressLine1,
@@ -29,7 +29,7 @@ export default function ShippingFormFields({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> ) => {
     setFormFields({...formFields, [e.target.name]: e.target.value})
-    formSchema.safeParse(formFields)
+    // formSchema.safeParse(formFields)
   }
 
   return (
