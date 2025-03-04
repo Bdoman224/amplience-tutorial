@@ -5,16 +5,16 @@ const nextConfig: NextConfig = {
     locales: ["en-US", "hr"],
     defaultLocale: "en-US",
     // DOESNT LOOK USEABLE ON LOCALHOST
-    domains: [
-      {
-        domain: "example.com",
-        defaultLocale: "en-US",
-      },
-      {
-        domain: "example.hr",
-        defaultLocale: "hr",
-      },
-    ],
+    // domains: [
+    //   {
+    //     domain: "example.com",
+    //     defaultLocale: "en-US",
+    //   },
+    //   {
+    //     domain: "example.hr",
+    //     defaultLocale: "hr",
+    //   },
+    // ],
   },
 };
 
