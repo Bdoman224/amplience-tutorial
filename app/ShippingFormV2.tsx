@@ -1,6 +1,6 @@
 
 import { ContentClient } from "dc-delivery-sdk-js";
-import ShippingFormFields from "@/app/ShippingFormFields";
+import ShippingFormFields from "@/components/ui/shippingForm/ShippingFormFields";
 import { AmplienceProps } from "@/lib/definitions";
 
 export default async function ShippingFormV2({content}: { content: string }) {
