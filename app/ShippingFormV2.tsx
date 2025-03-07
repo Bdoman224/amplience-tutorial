@@ -4,7 +4,7 @@ import ShippingFormFields from "@/components/ui/shippingForm/ShippingFormFields"
 import { AmplienceProps } from "@/lib/definitions";
 
 export default async function ShippingFormV2({content}: { content: string }) {
-  const client = new ContentClient({ hubName: "anorakwaterpolo" });
+  const client = new ContentClient({ stagingEnvironment: "tvyacidcczvx10ncnoqmzxjr8.staging.bigcontent.io", hubName: "anorakwaterpolo" });
   async function  fetchForm(): Promise<AmplienceProps> {
     const response = await client.getContentItemById(content);
     const { address1, address2, city, postcode, bannerImage } = response.body;
