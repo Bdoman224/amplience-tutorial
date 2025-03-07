@@ -8,6 +8,7 @@ export interface FormFields {
 
 export interface AmplienceProps extends FormFields {
   image: string;
+  message: string;
 }
 
 export type LocalizedAmplienceValue = {

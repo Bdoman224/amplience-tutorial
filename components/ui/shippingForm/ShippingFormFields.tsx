@@ -1,6 +1,6 @@
 "use client";
 import {FormFields, AmplienceProps} from "@/lib/definitions"
-import { Input, Box, Stack, Button } from "@chakra-ui/react";
+import { Input, Box, Stack, Button, Text } from "@chakra-ui/react";
 import { Field } from "@/components/ui/field";
 import { useState } from "react";
 import { z } from "zod";
@@ -8,7 +8,7 @@ import { z } from "zod";
 const shippingFormSchema = z.object({ 
   addressLine1: z.string(),
   addressLine2: z.string(),
-  city: z.number(),
+  city: z.string(),
   postcode: z.string(),
 });
 
@@ -18,6 +18,7 @@ export default function ShippingFormFields({
   city,
   postcode,
   image,
+  message
 }: AmplienceProps) {
 
   const [formFields, setFormFields] = useState<FormFields>({
@@ -26,7 +27,6 @@ export default function ShippingFormFields({
     city: "",
     postcode: "",
   });
-  console.log('AAAAAAA')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> ) => {
     setFormFields({...formFields, [e.target.name]: e.target.value})
@@ -34,9 +34,9 @@ export default function ShippingFormFields({
 
   const submitForm = () => {
     const validation = shippingFormSchema.safeParse(formFields)
-    console.log('Form submitted', validation)
     if(validation.success) {
-      alert('Form submitted successfully')
+      console.log('Form submitted successfully', formFields.addressLine1, formFields.addressLine2, formFields.city, formFields.postcode)  
+      alert('Form submitted successfully')  
     }
     else {
       console.log('Form validation failed', validation.error)
@@ -93,6 +93,7 @@ export default function ShippingFormFields({
           />
         </Field>
         <Button bg={"gray"} width={'100px'} onClick={submitForm}>Submit form</Button>
+        <Text>Words of wisdom: {message}</Text>
       </Stack>
     </Box>
   );
