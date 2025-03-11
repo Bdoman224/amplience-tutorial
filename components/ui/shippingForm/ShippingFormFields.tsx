@@ -1,0 +1,100 @@
+"use client";
+import {FormFields, AmplienceProps} from "@/lib/definitions"
+import { Input, Box, Stack, Button, Text } from "@chakra-ui/react";
+import { Field } from "@/components/ui/field";
+import { useState } from "react";
+import { z } from "zod";
+
+const shippingFormSchema = z.object({ 
+  addressLine1: z.string(),
+  addressLine2: z.string(),
+  city: z.string(),
+  postcode: z.string(),
+});
+
+export default function ShippingFormFields({
+  addressLine1,
+  addressLine2,
+  city,
+  postcode,
+  image,
+  message
+}: AmplienceProps) {
+
+  const [formFields, setFormFields] = useState<FormFields>({
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    postcode: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> ) => {
+    setFormFields({...formFields, [e.target.name]: e.target.value})
+  }
+
+  const submitForm = () => {
+    const validation = shippingFormSchema.safeParse(formFields)
+    if(validation.success) {
+      console.log('Form submitted successfully', formFields.addressLine1, formFields.addressLine2, formFields.city, formFields.postcode)  
+      alert('Form submitted successfully')  
+    }
+    else {
+      console.log('Form validation failed', validation.error)
+    }
+  }
+
+  return (
+    <Box
+      bgAttachment="fixed"
+      className="rounded"
+      bgImage={`url(${image})`}
+      width="1000px"
+      height="1000px"
+    >
+      <Stack color={"white"} className="gap-y-4 px-8 py-10">
+        <Field label={addressLine1} required errorText='This is required'>
+          <Input
+            placeholder="George Wash Street"
+            color="black"
+            bg="white"
+            name="addressLine1"
+            value={formFields.addressLine1}
+            onChange={handleChange}
+          />
+        </Field>
+        <Field label={addressLine2} required>
+          <Input
+            placeholder="Apt 15"
+            color="black"
+            bg="white"
+            name="addressLine2"
+            value={formFields.addressLine2}
+            onChange={(e) => handleChange(e)}
+          />
+        </Field>
+        <Field label={city} required>
+          <Input
+            placeholder="San Diego"
+            color="black"
+            bg="white"
+            name="city"
+            value={formFields.city}
+            onChange={handleChange}
+          />
+        </Field>
+        <Field label={postcode} required>
+          <Input
+            placeholder="12132131"
+            color="black"
+            bg="white"
+            name="postcode"
+            value={formFields.postcode}
+            onChange={handleChange}
+          />
+        </Field>
+        <Button bg={"gray"} width={'100px'} onClick={submitForm}>Submit form</Button>
+        <Text>Words of wisdom: {message}</Text>
+      </Stack>
+    </Box>
+  );
+}
